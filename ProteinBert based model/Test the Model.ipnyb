@@ -1,1 +1,19 @@
-
+# test the model
+model.eval()
+test_labels = []
+test_preds = []
+with torch.no_grad():
+    for inputs, labels in test_loader:
+        inputs, labels = inputs.to(device), labels.to(device)
+        outputs = model(inputs.long()).squeeze()
+        preds = torch.round(torch.sigmoid(outputs))
+        max_indices = torch.argmax(preds, dim=0)
+        #print(preds)
+        #print("------------------")
+        test_labels.extend(labels.cpu().numpy())
+        test_preds.append(max_indices.cpu().numpy())
+print('Epoch:', epoch, 
+      'Validation Accuracy:', accuracy_score(test_labels, test_preds), 
+      'Validation F1:', f1_score(test_labels, test_preds), 
+      'Validation Precision:', precision_score(test_labels, test_preds), 
+      'Validation Recall:', recall_score(test_labels, test_preds))
