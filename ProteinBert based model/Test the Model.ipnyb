@@ -13,7 +13,7 @@ with torch.no_grad():
         test_labels.extend(labels.cpu().numpy())
         test_preds.append(max_indices.cpu().numpy())
 print('Epoch:', epoch, 
-      'Validation Accuracy:', accuracy_score(test_labels, test_preds), 
-      'Validation F1:', f1_score(test_labels, test_preds), 
-      'Validation Precision:', precision_score(test_labels, test_preds), 
-      'Validation Recall:', recall_score(test_labels, test_preds))
+      'Test Accuracy:', accuracy_score(test_labels, test_preds), 
+      'Test F1:', f1_score(test_labels, test_preds), 
+      'Test Precision:', precision_score(test_labels, test_preds), 
+      'Test Recall:', recall_score(test_labels, test_preds))
